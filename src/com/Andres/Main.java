@@ -8,10 +8,8 @@ import com.Andres.models.Items.Espada;
 import com.Andres.models.Items.Flecha;
 import com.Andres.models.Items.Hacha;
 import com.Andres.models.Items.Mochila;
-import com.Andres.models.Personaje.AbstracPersonaje;
-import com.Andres.models.Personaje.Enemigo;
-import com.Andres.models.Personaje.Personaje;
-import com.Andres.models.Personaje.Raza;
+import com.Andres.models.Personaje.*;
+import com.Andres.models.Personaje.DecoradoresAbsPersonaje.DecoradorAtaqueMejorado;
 
 public class Main {
 
@@ -19,16 +17,16 @@ public class Main {
 
         Personaje gatitoHeroe = new Personaje("Gatito Heroe", 2,0,10);
         Personaje odinGigante = new Personaje("OdinGigante", 2,0,10);
-        Enemigo chucknorris = new Enemigo("Chuck Norris", Raza.Humano,5,5,100);
+        Enemigo chucknorris = new Enemigo("Chuck Norris", Raza.Humano,5,5,100,2);
 
 
         /******************** Lista de items ******************************/
-        Espada espadaSagrada = new Espada("Espada Sagrada", 5, 5);
-        Espada espadaArcoiris = new Espada("Espada de Arcoiris", 1, 3);
-        Hacha hachaDelDestino = new Hacha("Hacha del Destino", 7, 4, 30);
+        Espada espadaSagrada = new Espada("Espada Sagrada", 5, 5,2);
+        Espada espadaArcoiris = new Espada("Espada de Arcoiris", 1, 3,2);
+        Hacha hachaDelDestino = new Hacha("Hacha del Destino", 7, 4,2, 30);
         Mochila bolsito = new Mochila("bolso de viajero", 5, 10);
-        Flecha flechaBasica = new Flecha("Flecha de madera", 1, 1, 5);
-        Arco arcoMadera = new Arco("Arco de madera", 2, 1);
+        Flecha flechaBasica = new Flecha("Flecha de madera", 1, 1, 5,2);
+        Arco arcoMadera = new Arco("Arco de madera", 2, 1,5);
         Armadura armaduraLegendaria = new Armadura("Armadura Legendaria", 5, 8);
         Comida semillasHermitanio = new Comida("Semillas del Hermitaño", 1, 5, 3);
 
@@ -38,8 +36,8 @@ public class Main {
         //gatitoHeroe.agregarAlInventario(bolsito);
         //gatitoHeroe.agregarAlInventario(bolsito.agregar(espadaArcoiris));
         //gatitoHeroe.agregarAlInventario(hachaDelDestino);
-        //gatitoHeroe.agregarAlInventario(arcoMadera);
-        //gatitoHeroe.agregarAlInventario(flechaBasica);
+        gatitoHeroe.agregarAlInventario(arcoMadera);
+        gatitoHeroe.agregarAlInventario(flechaBasica);
         gatitoHeroe.agregarAlInventario(armaduraLegendaria);
 
         //odinGigante.agregarAlInventario(armaduraLegendaria);
@@ -56,29 +54,17 @@ public class Main {
             System.out.println(exception.getMessage());
         }
         /************ Estadisticas **********************/
-        //mostrarEstadisticas(gatitoHeroe);
-
+        mostrarEstadisticas(gatitoHeroe);
+        DecoradorAtaqueMejorado gatitoHeroeSuperSayayin = new DecoradorAtaqueMejorado(gatitoHeroe,2);
+        mostrarPersonaje(gatitoHeroeSuperSayayin);
         // mostrarEstadisticas(odinGigante);
 
-        /********** simula una pelea*******************/
-
-            pelea(gatitoHeroe, chucknorris);
-
-        mostrarPersonaje(gatitoHeroe);
-        mostrarPersonaje(chucknorris);
-       // odinGigante.agregarAlInventario(semillasHermitanio);
-        try {
-            odinGigante.usa("Semillas del Hermitaño");
-        } catch (PersonajeException e) {
-            System.out.println(e.getMessage());
-        }
-        mostrarPersonaje(chucknorris);
-        //odinGigante.usa("Semillas del Hermitaño");
-        //mostrarPersonaje(odinGigante);
+        /** simular pelea */
+        //simulacionDePelea(gatitoHeroe,chucknorris);
 
     }
 
-    private static void mostrarPersonaje(AbstracPersonaje personaje) {
+    private static void mostrarPersonaje(IAbsPersonaje personaje) {
         System.out.println(personaje.toString());
     }
 
@@ -107,5 +93,27 @@ public class Main {
                         + "Armadura: " + armadura + "\n"
                         + "-------------------------------------------------------"
         );
+    }
+
+    public static void simulacionDePelea(AbstracPersonaje personaje1, AbstracPersonaje personaje2){
+        pelea(personaje1, personaje2);
+
+        System.out.println("chuchNorris retrocede");
+        personaje2.getCoordenadas().mover(0,10);
+
+        pelea(personaje1,personaje2);
+        /*
+        try {
+             personaje1.usa("Arco de madera");
+             personaje1.usa("Flecha de madera");
+        }catch (PersonajeException e){
+            System.out.println(e.getMessage());
+        }
+
+         */
+        pelea(personaje1,personaje2);
+
+        mostrarPersonaje(personaje1);
+        mostrarPersonaje(personaje2);
     }
 }

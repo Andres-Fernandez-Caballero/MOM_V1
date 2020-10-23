@@ -5,10 +5,12 @@ import com.Andres.models.Personaje.Personaje;
 public class Flecha extends Consumible {
 
     int damage;
+    int rango;
 
-    public Flecha(String nombre, int peso, int cantidad, int damage) {
+    public Flecha(String nombre, int peso, int cantidad, int damage, int rango) {
         super(nombre, peso, cantidad);
         this.damage = damage;
+        this.rango = rango;
     }
 
     @Override
@@ -31,4 +33,7 @@ public class Flecha extends Consumible {
         return getNombre() + " cantidad " + getCantidad();
     }
 
+    public int getRango() {
+        return rango;
+    }
 }

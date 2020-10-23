@@ -4,8 +4,8 @@ public class Hacha  extends Arma{
 
     private float golpeCritico;
 
-    public Hacha(String nombre, int peso, int baseDamage, float golpeCritico) {
-        super(nombre, peso, baseDamage);
+    public Hacha(String nombre, int peso, int baseDamage,int rango, float golpeCritico) {
+        super(nombre, peso, baseDamage, rango);
         setGolpeCritico(golpeCritico);
     }
 

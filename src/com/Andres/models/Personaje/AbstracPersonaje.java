@@ -3,14 +3,16 @@ package com.Andres.models.Personaje;
 import com.Andres.models.Exepciones.PersonajeException;
 import com.Andres.models.Items.Inventario;
 
-public abstract class AbstracPersonaje {
+public abstract class AbstracPersonaje implements IAbsPersonaje{
 
     private final String nombre;
     private Estadisticas estadisticas;
+    private Coordenadas coordenadas;
 
     public AbstracPersonaje(String nombre, int ataque_base, int defensa_base, int vidaMax) {
         this.nombre = nombre;
         this.estadisticas = new Estadisticas(ataque_base, defensa_base, vidaMax);
+        this.coordenadas = new Coordenadas(100,100); //TODO: sacar el numero magico
     }
 
     public void setVidaActual(int cantVida, int tipo_efecto){
@@ -25,8 +27,6 @@ public abstract class AbstracPersonaje {
         return this.estadisticas;
     }
 
-    public abstract  int getAtaque();
-
     public abstract int getDefensa();
 
 
@@ -39,6 +39,12 @@ public abstract class AbstracPersonaje {
         if(this.isDead()){
             throw new PersonajeException(PersonajeException.PERSONAJE_MUERTO);
         }
+
+        if( getRango() < this.coordenadas.distanciaA(objetivo.coordenadas)){
+
+            throw new PersonajeException(PersonajeException.PERSONAJE_FUERA_RANGO + "\ndistancia del objetivo: " + this.coordenadas.distanciaA(objetivo.getCoordenadas()) + " rango del arma: " + this.getRango());
+        }
+
         return objetivo.recibeAtaque(this.getAtaque());
     }
 
@@ -53,5 +59,22 @@ public abstract class AbstracPersonaje {
 
         return ataqueRecibido;
     }
-    
+
+    public abstract int getRango();
+
+    public Coordenadas getCoordenadas() {
+        return coordenadas;
+    }
+
+    @Override
+    public String toString() {
+        return "nombre: " + nombre + '\n'
+                + "Vida: " + estadisticas.getVidaActual() + "/" + estadisticas.getVidaMax() + "\n"
+                + "coordenadas: " + coordenadas + "/n"
+                + "defensa: " + getDefensa() + "/n"
+                + "Ataque: " + getAtaque() + "/n"
+                + "rango: " + getRango() + "/n"
+                + "-------------------------------------------------------"
+                ;
+    }
 }

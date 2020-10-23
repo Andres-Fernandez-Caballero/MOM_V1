@@ -33,6 +33,11 @@ public class Personaje extends AbstracPersonaje {
         return defensa;
     }
 
+    @Override
+    public int getRango() {
+        return this.getManoDerecha().getRango();
+    }
+
     public void usa(String nombreItem) throws PersonajeException{
         Item item = this.inventario.buscar(nombreItem);
         if(item == null){ // si no encuentra el item
