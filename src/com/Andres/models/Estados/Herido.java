@@ -2,12 +2,8 @@ package com.Andres.models.Estados;
 
 public class Herido implements IEstadoSalud {
 
-    private final float reduccionDamage = (float) 0.5;
-
-    @Override
-    public float reduccion() {
-        return reduccionDamage;
-    }
+    private final float REDUCCION_PORCENTAJE_ATAQUE = 50; //%
+    private final float REDUCCION_PORCENTAJE_EXPERIENCIA = 50; //%
 
     @Override
     public String toString() {
@@ -17,5 +13,15 @@ public class Herido implements IEstadoSalud {
     @Override
     public boolean isDead() {
         return false;
+    }
+
+    @Override
+    public float modificadorAtaque() {
+        return REDUCCION_PORCENTAJE_ATAQUE/100;
+    }
+
+    @Override
+    public float modificadorExperiencia() {
+        return REDUCCION_PORCENTAJE_EXPERIENCIA/100;
     }
 }

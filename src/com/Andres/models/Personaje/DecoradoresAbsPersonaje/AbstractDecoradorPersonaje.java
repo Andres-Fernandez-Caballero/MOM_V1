@@ -1,13 +1,17 @@
 package com.Andres.models.Personaje.DecoradoresAbsPersonaje;
 
-import com.Andres.models.Personaje.AbstracPersonaje;
-import com.Andres.models.Personaje.IAbsPersonaje;
+import com.Andres.models.Personaje.DefinicionPersonaje.AbstracPersonaje;
+import com.Andres.models.Personaje.DefinicionPersonaje.IAbsPersonaje;
 
 public class AbstractDecoradorPersonaje implements IAbsPersonaje {
     protected AbstracPersonaje personajeEnvuelto;
 
     public AbstractDecoradorPersonaje(AbstracPersonaje abstracPersonaje) {
         this.personajeEnvuelto = abstracPersonaje;
+    }
+
+    public AbstracPersonaje getPersonajeEnvuelto() {
+        return personajeEnvuelto;
     }
 
 
@@ -19,5 +23,10 @@ public class AbstractDecoradorPersonaje implements IAbsPersonaje {
     @Override
     public String toString() {
         return personajeEnvuelto.toString();
+    }
+
+    @Override
+    public int getDefensa() {
+        return personajeEnvuelto.getDefensa();
     }
 }

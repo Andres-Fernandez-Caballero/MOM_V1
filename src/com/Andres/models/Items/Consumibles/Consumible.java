@@ -1,4 +1,6 @@
-package com.Andres.models.Items;
+package com.Andres.models.Items.Consumibles;
+
+import com.Andres.models.Items.Item;
 
 public abstract class Consumible extends Item {
 

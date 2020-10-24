@@ -1,5 +1,6 @@
-package com.Andres.models.Items;
+package com.Andres.models.Items.Consumibles;
 
+import com.Andres.models.Items.Armas.Arco;
 import com.Andres.models.Personaje.Personaje;
 
 public class Flecha extends Consumible {

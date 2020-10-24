@@ -1,5 +1,6 @@
-package com.Andres.models.Items;
+package com.Andres.models.Items.MochilaEInventario;
 
+import com.Andres.models.Items.Item;
 import com.Andres.models.Personaje.Personaje;
 
 import java.util.ArrayList;

@@ -1,13 +1,12 @@
-package com.Andres.models.Personaje;
+package com.Andres.models.Personaje.DefinicionPersonaje;
 
 import com.Andres.models.Estados.IEstadoSalud;
-import com.Andres.models.Items.Inventario;
 
 public class Estadisticas {
 
     private BarraVida barraVida;
-    private final int ataqueBase;
-    private final int defensaBase;
+    private  int ataqueBase;
+    private  int defensaBase;
 
     public Estadisticas(int ataqueBase, int defensaBase, int vidaMax) {
         this.ataqueBase = ataqueBase;
@@ -60,4 +59,12 @@ public class Estadisticas {
                 + "Ataque base: " + ataqueBase +"\n"
                 + "Defensa base: " + defensaBase + "\n";
     }
+
+	public void setVidaMax(int nueva_vida_max) {
+        this.getBarraVida().setVidaMax(nueva_vida_max);
+    }
+    
+    public void setAtaqueBase(int ataqueBase) {
+        this.ataqueBase = ataqueBase;
+    }    
 }

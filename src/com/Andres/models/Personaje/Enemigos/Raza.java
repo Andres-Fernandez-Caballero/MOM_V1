@@ -1,4 +1,4 @@
-package com.Andres.models.Personaje;
+package com.Andres.models.Personaje.Enemigos;
 
 public enum Raza {
     Elfo,

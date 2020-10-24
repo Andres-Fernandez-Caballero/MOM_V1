@@ -1,4 +1,4 @@
-package com.Andres.models.Items;
+package com.Andres.models.Items.Armas;
 
 public class Espada extends Arma {
 

@@ -2,6 +2,7 @@ package com.Andres.models.Estados;
 
 public interface IEstadoSalud {
 
-    float reduccion();
+    float modificadorAtaque();
+    float modificadorExperiencia();
     boolean isDead();
 }

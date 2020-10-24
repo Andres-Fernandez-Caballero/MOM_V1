@@ -1,18 +1,22 @@
 package com.Andres.models.Personaje;
 
 import com.Andres.models.Exepciones.PersonajeException;
-import com.Andres.models.Items.Arma;
-import com.Andres.models.Items.Armadura;
-import com.Andres.models.Items.Inventario;
 import com.Andres.models.Items.Item;
+import com.Andres.models.Items.Ardmaduras.*;
+import com.Andres.models.Items.Armas.Arma;
+import com.Andres.models.Items.MochilaEInventario.Inventario;
+import com.Andres.models.Misiones.RegistroMisiones;
+import com.Andres.models.Personaje.DefinicionPersonaje.AbstracPersonaje;
 
 public class Personaje extends AbstracPersonaje {
 
     private Inventario inventario;
+    private RegistroMisiones registroMisiones;
 
     public Personaje(String nombre, int ataque_base, int defensa_base, int vidaMax) {
         super(nombre, ataque_base, defensa_base, vidaMax);
         this.inventario = new Inventario(100); //TODO: arreglar ese Horrendo numero magico...
+        this.registroMisiones = new RegistroMisiones();
     }
 
     @Override
@@ -27,9 +31,7 @@ public class Personaje extends AbstracPersonaje {
     @Override
     public int getDefensa() {
         int defensa = this.getEstadisticas().getDefensa();
-        if(inventario.armaduraEquipada()){
-            defensa += inventario.getArmadura().getDefensa();
-        }
+        defensa += this.getInventario().getArmadura().getDefensa();
         return defensa;
     }
 
@@ -44,6 +46,27 @@ public class Personaje extends AbstracPersonaje {
             throw new PersonajeException(PersonajeException.ITEM_NO_ENCONTRADO);
         }
         item.usar(this);
+    }
+
+    public int atacaA(AbstracPersonaje objetivo) throws PersonajeException {
+        if (this.isDead()) {
+            throw new PersonajeException(PersonajeException.PERSONAJE_MUERTO);
+        }
+
+        if (getRango() < this.getCoordenadas().distanciaA(objetivo.getCoordenadas())) {
+
+            throw new PersonajeException(PersonajeException.PERSONAJE_FUERA_RANGO + "\ndistancia del objetivo: "
+                    + this.getCoordenadas().distanciaA(objetivo.getCoordenadas()) + " rango del arma: " + this.getRango());
+        }
+        
+        int ataqueEfectuado = objetivo.recibeAtaque(this.getAtaque());
+
+        if(objetivo.isDead()){
+            this.getBarraExperiencia().acumularExperiencia(this, objetivo);
+            this.registroMisiones.infrormarPersonajeMuerto(this);
+        }
+
+        return ataqueEfectuado;
     }
 
     public Inventario getInventario(){
@@ -63,10 +86,26 @@ public class Personaje extends AbstracPersonaje {
         );
     }
 
-    public void equiparArmadura(Armadura armadura){
-        // equipar armadura
-        this.inventario.equiparArmadura(armadura);
-        System.out.println("ahora " + this.getNombre() + " esta protegido por " + armadura.getNombre());
+    public void equiparCasco(Casco casco){
+
+        this.getInventario().getArmadura().equiparCasco(casco);;
+        mensajeArmaduraEquipada(casco);
+    
+    }
+
+    public void equiparPeto(Peto peto){
+        this.getInventario().getArmadura().equiparPeto(peto);
+        mensajeArmaduraEquipada(peto);
+    }
+
+    public void equiparGuanteletes(Guanteletes guanteletes){
+        this.getInventario().getArmadura().equiparGuanteletes(guanteletes);
+        mensajeArmaduraEquipada(guanteletes);
+    }
+
+    public void equiparGrebas(Grebas grebas){
+        this.getInventario().getArmadura().equiparGrebas(grebas);
+        mensajeArmaduraEquipada(grebas);
     }
 
     public void equiparArmaManoDerecha(Arma arma){
@@ -75,10 +114,8 @@ public class Personaje extends AbstracPersonaje {
         System.out.println(this.getNombre() + " ahora porta " + this.getManoDerecha().getNombre());
     }
 
-    @Override
-    public String toString() {
-        return
-                "Personaje " + getNombre() + " " + getEstadisticas().toString() + "\n"
-                        + "-------------------------------------------------------";
+    public void mensajeArmaduraEquipada(Armadura armadura){
+        System.out.println("ahora " + this.getNombre() + " esta protegido por " + armadura.getNombre());
     }
+
 }

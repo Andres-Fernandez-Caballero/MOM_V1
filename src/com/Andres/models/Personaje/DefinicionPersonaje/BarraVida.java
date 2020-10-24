@@ -1,4 +1,4 @@
-package com.Andres.models.Personaje;
+package com.Andres.models.Personaje.DefinicionPersonaje;
 
 import com.Andres.models.Estados.Herido;
 import com.Andres.models.Estados.IEstadoSalud;
@@ -10,16 +10,18 @@ public class BarraVida {
     public static final int TIPO_CURA = 0;
     public static final int TIPO_DAMAGE = 1;
 
+    private static final double PORCENTAJE_UMBRAL_HERIDO = 50; // % porcentaje
+
     private final int umbralHerido;
 
-    private  final int vidaMax;
+    private int vidaMax;
     private int vidaActual;
     private IEstadoSalud estadoSalud;
 
     public BarraVida(int vidaMax) {
         this.vidaMax = vidaMax;
         this.vidaActual = vidaMax;
-        this.umbralHerido = vidaMax/2;
+        this.umbralHerido = (int) (vidaMax * (1 + (PORCENTAJE_UMBRAL_HERIDO/100) ) );
         this.estadoSalud = new Vivo();
     }
 
@@ -74,6 +76,11 @@ public class BarraVida {
     public String toString() {
         return this.vidaActual + "/" +this.vidaMax + " Estado: " + this.estadoSalud.toString();
     }
+
+	public void setVidaMax(int nueva_vida_max) {
+        this.vidaMax = nueva_vida_max;
+        this.vidaActual = vidaMax;
+	}
 
     
     

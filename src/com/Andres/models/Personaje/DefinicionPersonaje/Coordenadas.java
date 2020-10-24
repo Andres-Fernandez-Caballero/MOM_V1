@@ -1,4 +1,4 @@
-package com.Andres.models.Personaje;
+package com.Andres.models.Personaje.DefinicionPersonaje;
 
 public class Coordenadas {
 

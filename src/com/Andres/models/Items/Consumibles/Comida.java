@@ -1,6 +1,6 @@
-package com.Andres.models.Items;
+package com.Andres.models.Items.Consumibles;
 
-import com.Andres.models.Personaje.BarraVida;
+import com.Andres.models.Personaje.DefinicionPersonaje.*;
 import com.Andres.models.Personaje.Personaje;
 
 public class Comida extends Consumible {

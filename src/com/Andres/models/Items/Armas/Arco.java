@@ -1,6 +1,8 @@
-package com.Andres.models.Items;
+package com.Andres.models.Items.Armas;
 
-public class Arco extends Arma{
+import com.Andres.models.Items.Consumibles.Flecha;
+
+public class Arco extends Arma {
 
     private Flecha flecha;
 

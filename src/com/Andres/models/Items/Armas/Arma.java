@@ -1,5 +1,6 @@
-package com.Andres.models.Items;
+package com.Andres.models.Items.Armas;
 
+import com.Andres.models.Items.Item;
 import com.Andres.models.Personaje.Personaje;
 
 public abstract class Arma extends Item {
