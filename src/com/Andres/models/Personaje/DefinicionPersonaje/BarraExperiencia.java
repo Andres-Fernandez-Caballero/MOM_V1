@@ -10,8 +10,8 @@ public class BarraExperiencia {
     private final int COEFICIENTE_DE_EXPERIENCIA = 3;
     private final int COEFICIENTE_AUMENTO_STATS = 10;
 
-    public final int OPCION_MAS_VIDA = 1;
-    public final int OPCION_MAS_ATAQUE = 2;
+    public static final int OPCION_MAS_VIDA = 1;
+    public static final int OPCION_MAS_ATAQUE = 2;
 
     private int experienciaActual;
     private int nivel;
@@ -73,3 +73,4 @@ public class BarraExperiencia {
     }
 
 }
++
