@@ -18,7 +18,7 @@ public class Main {
 
         Personaje gatitoHeroe = new Personaje("Gatito Heroe", 2,0,10);
         Personaje odinGigante = new Personaje("OdinGigante", 2,0,10);
-        Enemigo chucknorris = new Guerrero("Chuck Norris", Raza.Humano,5,5,100,2);
+        Enemigo chucknorris = new Guerrero("Chuck Norris", 5, 5, 100, 100, Raza.Humano, 1);
 
 
         /******************** Lista de items ******************************/
